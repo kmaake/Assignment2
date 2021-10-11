@@ -6,3 +6,19 @@ output:
   pdf_document: default
 lang: no-NB
 ---
+
+Introduksjon
+
+Kort litteraturgjennomgang
+
+Analyse:
+
+```{r}
+data('heights', package = 'modelr')
+hoyde <- heights
+```
+
+
+
+
+
