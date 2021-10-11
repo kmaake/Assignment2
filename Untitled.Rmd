@@ -1,0 +1,8 @@
+---
+title: "Er det høyde som bestemmer inntekt?"
+output:
+  word_document: default
+  html_notebook: default
+  pdf_document: default
+lang: no-NB
+---
