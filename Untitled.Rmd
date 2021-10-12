@@ -7,16 +7,48 @@ output:
 lang: no-NB
 ---
 
+```{r}
+library(modelr)
+library(ggplot2)
+library(tinytex)
+library(tidyverse)
+library(ggpubr)
+options(scipen = 999)
+```
+
+
 # Kort introduksjon
+I denne oppgaven skal vi finne ut om høyde bestemmer inntekten våres. 
 
 # Kort litteraturgjennomgang
 
-Analyse:
+# Analyse:
 
 ```{r}
 data('heights', package = 'modelr')
 hoyde <- heights
 ```
+
+EDA
+```{r}
+ggplot(data = heights, mapping = aes(income)) + geom_histogram()
+
+```
+
+Skrive en forklaring på hvorfor utliggerne ligger så langt il høyre.
+
+
+Ja, vi har med personer uten inntekt i datasettet. 
+```{r}
+sum(hoyde$income == 0)
+```
+
+Regresjonsanalyse
+```{r}
+
+```
+
+
 
 # Referanser
 
