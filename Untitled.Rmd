@@ -45,6 +45,7 @@ sum(hoyde$income == 0)
 
 Regresjonsanalyse
 ```{r}
+summary(lm(income ~ height, data = heights))
 
 ```
 
