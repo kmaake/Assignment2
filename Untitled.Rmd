@@ -5,6 +5,7 @@ output:
   html_notebook: default
   pdf_document: default
 lang: no-NB
+bibliography: Bestemmer hoyde inntekten.bib, references.bib
 ---
 
 ```{r}
@@ -16,9 +17,9 @@ library(ggpubr)
 options(scipen = 999)
 ```
 
-
 # Kort introduksjon
-I denne oppgaven skal vi finne ut om høyde bestemmer inntekten våres. 
+
+I denne oppgaven skal vi finne ut om høyde bestemmer inntekten våres.
 
 # Kort litteraturgjennomgang
 
@@ -30,6 +31,7 @@ hoyde <- heights
 ```
 
 EDA
+
 ```{r}
 ggplot(data = heights, mapping = aes(income)) + geom_histogram()
 
@@ -37,15 +39,29 @@ ggplot(data = heights, mapping = aes(income)) + geom_histogram()
 
 Skrive en forklaring på hvorfor utliggerne ligger så langt il høyre.
 
+Ja, vi har med personer uten inntekt i datasettet.
 
-Ja, vi har med personer uten inntekt i datasettet. 
 ```{r}
 sum(hoyde$income == 0)
 ```
 
 Regresjonsanalyse
 
+```{r}
+hoyde <- heights
+filter(heights, income %in% c(1:178000))
+```
 
+```{r}
+hoyde <- heights %>% 
+mutate(
+  height_cm = (height)*2.54,
+  weight_kg = (weight)*0.45359237
+  ) %>%
+  select(income, height_cm, weight_kg, everything()) %>%
+  arrange(height)
+  head(hoyde, n=5)
+```
 
 
 
