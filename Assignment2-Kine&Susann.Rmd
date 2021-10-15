@@ -1,0 +1,114 @@
+---
+title: "Er det høyde som bestemmer inntekt?"
+output:
+  word_document: default
+  html_notebook: default
+  pdf_document: default
+lang: no-NB
+---
+
+```{r setup}
+library(modelr)
+library(ggplot2)
+library(tinytex)
+library(tidyverse)
+library(ggpubr)
+options(scipen = 999)
+```
+
+# Introduksjon
+
+I denne oppgaven skal vi finne ut om høyde bestemmer inntekten våres.
+
+# Kort litteraturgjennomgang
+
+# Beskrivende statistikk
+
+# Analyse:
+For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg. 
+
+```{r hoyde,jobb}
+hoyde <- heights
+```
+
+Her har man gjort om variablene til metrisk standard. En har også lagt til tre nye variabler. 
+```{r}
+hoyde <- hoyde %>% 
+  mutate(inntekt = income * 8.42,
+         hoyde_cm = height * 2.54,
+         vekt_kg = weight * 0.454,
+         BMI = (vekt_kg/hoyde_cm)^2)
+```
+
+
+```{r}
+ggplot(data = hoyde, aes(x = inntekt)) + 
+  geom_histogram()
+
+```
+I histogrammet ovenfor ser en at utliggerne ligger veldig langt til høyre. Grunnen for dette er at de har funnet gjennomsnittet av topp 2% inntekt.  
+
+
+```{r}
+hoyde_begr <- hoyde %>% 
+  filter(inntekt < 1500000,
+         inntekt > 1)
+```
+
+```{r}
+ggplot(data = hoyde_begr, aes(x = inntekt)) + 
+  geom_histogram()
+```
+
+Som man kan se så er personer uten inntekt tatt med i datasettet. Og summen er 1740 personer uten inntekt. 
+
+```{r}
+sum(hoyde$income == 0)
+```
+
+
+## Regresjonsanalyse
+
+```{r}
+lm(inntekt ~ hoyde_cm, data = hoyde) %>% 
+  summary()
+```
+
+```{r}
+-1337837.4 + (9884.6 * 173)
+-1337837.4 + (9884.6 * 161)
+```
+Man øker inntekten sin med 9884,6 kr per cm en øker i høyde. 
+
+
+```{r}
+lm(inntekt ~ hoyde_cm + vekt_kg, data = hoyde_begr) %>% 
+  summary()
+```
+
+
+```{r}
+-636236 + (6735.7 * 173) + (-691.5 * 70)
+-636236 + (6735.7 * 161) + (-691.5 * 65)
+```
+
+Når høyden øker så går inntekten opp, mens når vekten økes går lønnen ned. Men en kombinasjon av disse gir økt inntekt. 
+
+```{r}
+hoyde <- hoyde %>% 
+  mutate(
+    married = factor(
+      case_when(
+        marital == 'married' ~ TRUE, TRUE ~ FALSE
+      )
+    )
+  )
+```
+
+
+
+# Referanser
+
+
+
+
