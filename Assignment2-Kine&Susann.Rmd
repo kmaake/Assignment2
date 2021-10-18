@@ -15,6 +15,7 @@ library(ggplot2)
 library(tinytex)
 library(tidyverse)
 library(ggpubr)
+library(huxtable)
 options(scipen = 999)
 ```
 
@@ -97,6 +98,12 @@ lm(inntekt ~ hoyde_cm + vekt_kg, data = hoyde_begr) %>%
 Når høyden øker så går inntekten opp, mens når vekten økes går lønnen ned. Men en kombinasjon av disse gir økt inntekt. 
 
 ```{r}
+lm(inntekt ~ hoyde_cm + vekt_kg + BMI, data = hoyde_begr) %>% 
+  summary()
+```
+
+
+```{r}
 hoyde <- hoyde %>% 
   mutate(
     married = factor(
@@ -106,6 +113,7 @@ hoyde <- hoyde %>%
     )
   )
 ```
+
 
 
 
