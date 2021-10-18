@@ -102,6 +102,14 @@ lm(inntekt ~ hoyde_cm + vekt_kg + BMI, data = hoyde_begr) %>%
   summary()
 ```
 
+```{r}
+summary(heights)
+```
+
+```{r}
+huxreg()
+```
+
 
 ```{r}
 hoyde <- hoyde %>% 
