@@ -1,10 +1,18 @@
 ---
 title: "Er det høyde som bestemmer inntekt?"
+<<<<<<< HEAD
+=======
+authors: Kine Maakestad & Susann Sivertsen
+>>>>>>> Kine
 output:
   word_document: default
   html_notebook: default
   pdf_document: default
 lang: no-NB
+<<<<<<< HEAD
+=======
+bibliography: references.bib
+>>>>>>> Kine
 ---
 
 ```{r setup}
@@ -13,6 +21,10 @@ library(ggplot2)
 library(tinytex)
 library(tidyverse)
 library(ggpubr)
+<<<<<<< HEAD
+=======
+library(huxtable)
+>>>>>>> Kine
 options(scipen = 999)
 ```
 
@@ -37,13 +49,21 @@ hoyde <- hoyde %>%
   mutate(inntekt = income * 8.42,
          hoyde_cm = height * 2.54,
          vekt_kg = weight * 0.454,
+<<<<<<< HEAD
          BMI = (vekt_kg/hoyde_cm)^2)
+=======
+         BMI = vekt_kg/(hoyde_cm/100)^2)
+>>>>>>> Kine
 ```
 
 
 ```{r}
 ggplot(data = hoyde, aes(x = inntekt)) + 
+<<<<<<< HEAD
   geom_histogram()
+=======
+  geom_histogram(bins = 30)
+>>>>>>> Kine
 
 ```
 I histogrammet ovenfor ser en at utliggerne ligger veldig langt til høyre. Grunnen for dette er at de har funnet gjennomsnittet av topp 2% inntekt.  
@@ -70,6 +90,7 @@ sum(hoyde$income == 0)
 ## Regresjonsanalyse
 
 ```{r}
+<<<<<<< HEAD
 lm(inntekt ~ hoyde_cm, data = hoyde) %>% 
   summary()
 ```
@@ -90,11 +111,60 @@ lm(inntekt ~ hoyde_cm + vekt_kg, data = hoyde_begr) %>%
 ```{r}
 -636236 + (6735.7 * 173) + (-691.5 * 70)
 -636236 + (6735.7 * 161) + (-691.5 * 65)
+=======
+summary(hoyde)
+```
+
+
+```{r}
+mod1 <- "inntekt ~ hoyde_cm"
+lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
+```
+
+```{r}
+summary(lm1)
+```
+
+
+```{r}
+-1361001.0 + (10047.9 * 173)
+-1361001.0 + (10047.9 * 161)
+```
+Man øker inntekten sin med 10047.9 kr per cm en øker i høyde. 
+
+```{r}
+mod2 <- "inntekt ~ hoyde_cm + vekt_kg"
+lm2 <- lm(mod2, data = hoyde, subset = complete.cases(hoyde))
+```
+
+```{r}
+summary(lm2)
+```
+
+
+
+```{r}
+-1466873.6 + (11430.3 * 173) + (-1518.4 * 70)
+-1466873.6 + (11430.3 * 161) + (-1518.4 * 65)
+>>>>>>> Kine
 ```
 
 Når høyden øker så går inntekten opp, mens når vekten økes går lønnen ned. Men en kombinasjon av disse gir økt inntekt. 
 
 ```{r}
+<<<<<<< HEAD
+=======
+mod3 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
+lm3 <- lm(mod3, data = hoyde, subset = complete.cases(hoyde))
+```
+
+```{r}
+summary(lm3)
+```
+
+
+```{r}
+>>>>>>> Kine
 hoyde <- hoyde %>% 
   mutate(
     married = factor(
@@ -107,6 +177,18 @@ hoyde <- hoyde %>%
 
 
 
+<<<<<<< HEAD
+=======
+```{r}
+huxreg(
+   list("mod1" = lm1, "mod2" = lm2, "mod3" = lm3),
+   error_format = "[{statistic}]",
+   note = "Regresjonstabell 3: {stars}. T statistics in brackets."
+   )
+```
+
+
+>>>>>>> Kine
 # Referanser
 
 
