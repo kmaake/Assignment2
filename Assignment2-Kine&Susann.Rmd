@@ -146,7 +146,7 @@ huxreg(
 
 
 ```{r}
-mod4 <- "inntekt ~ sex*hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2)"
+mod4 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2)) + BMI + I(BMI^2)"
 lm4 <- lm(mod4, data = hoyde)
 summary(lm4)
 ```
