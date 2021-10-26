@@ -2,12 +2,13 @@
 title: "Er det høyde som bestemmer inntekt?"
 authors: Kine Maakestad & Susann Sivertsen
 output:
-  word_document: default
+  html_document:
+    df_print: paged
   html_notebook: default
   pdf_document: default
+  word_document: default
 lang: no-NB
 bibliography: references.bib
-
 ---
 
 ```{r setup}
@@ -25,6 +26,18 @@ options(scipen = 999)
 I denne oppgaven skal vi finne ut om høyde bestemmer inntekten våres.
 
 # Kort litteraturgjennomgang
+
+Artikkelen ser på relasjonen mellom karriere suksess og fysisk høyde. Det baseres på en meta-analyse av litteraturen, hvor resultatene viser mot at høyde er relatert til sosiale forhold, leder muligheter (emerge) og opptreden. Artikkelen viser også til at høyde har er sterkere relasjon til karriere suksess for menn enn for kvinner, men denne forskjellen sees ikke på som signifikant. Ettersom det ikke finnes forskning på forholde mellom høyde og inntekt, brukes det fire steg som tilsier at høyde er positivt for inntekt etter at det er tatt hensyn til kjønn, alder og vekt. Artikkelen tar for seg en omfattende analyse av relasjonen til høyde og karriere suksess, og resultatene tilsier at høye individer har et fortrinn i viktige aspekter av deres karrierer. 
+
+
+Artikkelen baseres på samfunnets inntrykk av at høye folk er mer suksessfulle. 
+
+
+
+
+
+
+
 
 # Beskrivende statistikk
 
@@ -140,6 +153,13 @@ huxreg(
    note = "Regresjonstabell 3: {stars}. T statistics in brackets."
    )
 ```
+
+```{r}
+mod4 <- "inntekt ~ sex + hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2)"
+lm4 <- lm(mod4, data = hoyde)
+summary (lm4)
+```
+
 
 
 # Referanser
