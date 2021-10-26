@@ -2,12 +2,13 @@
 title: "Er det høyde som bestemmer inntekt?"
 authors: Kine Maakestad & Susann Sivertsen
 output:
-  word_document: default
+  html_document:
+    df_print: paged
   html_notebook: default
   pdf_document: default
+  word_document: default
 lang: no-NB
 bibliography: references.bib
-
 ---
 
 ```{r setup}
@@ -17,6 +18,7 @@ library(tinytex)
 library(tidyverse)
 library(ggpubr)
 library(huxtable)
+library(car)
 options(scipen = 999)
 ```
 
@@ -141,6 +143,18 @@ huxreg(
    )
 ```
 
+
+
+```{r}
+mod4 <- "inntekt ~ sex*hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2)"
+lm4 <- lm(mod4, data = hoyde)
+summary(lm4)
+```
+
+
+```{r}
+linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0"))
+```
 
 # Referanser
 
