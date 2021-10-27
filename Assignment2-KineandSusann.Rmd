@@ -2,10 +2,10 @@
 title: "Er det høyde som bestemmer inntekt?"
 authors: Kine Maakestad & Susann Sivertsen
 output:
+  pdf_document: default
+  html_notebook: default
   html_document:
     df_print: paged
-  html_notebook: default
-  pdf_document: default
   word_document: default
 lang: no-NB
 bibliography: references.bib
@@ -155,6 +155,11 @@ summary(lm4)
 ```{r}
 linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0"))
 ```
+
+```{r}
+
+```
+
 
 # Referanser
 
