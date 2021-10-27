@@ -33,7 +33,7 @@ I denne oppgaven skal vi finne ut om høyde bestemmer inntekten våres.
 Beskrivende statistikk av datasettet "heights" er:
 
   **heights** = er høyde i tommer
-  **income** = årlig inntekt. Top 2% gjennomsnitt av verdien og gjennomsnittet er brukt til å erstatte alle verdiene                itopp inntekten.
+  **income** = årlig inntekt. Top 2% gjennomsnitt av verdien og gjennomsnittet er brukt til å erstatte alle verdiene                i topp inntekten.
   **weight** = det er vekten i pounds
   **age** = alder i år, mellom 47 og 56
   **martial** = sivilstatus
