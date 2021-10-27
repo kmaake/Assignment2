@@ -18,6 +18,7 @@ library(tinytex)
 library(tidyverse)
 library(ggpubr)
 library(huxtable)
+<<<<<<< HEAD
 options(scipen = 999)
 ```
 
@@ -29,6 +30,20 @@ Denne oppgaven skal avgjøre om høyde påvirker inntekt.
 
 **The Effect of Physical Height on Workplace Sucsess and Income: Preliminary Test of a Theoretical Model, av @judge2004.**
 
+=======
+library(car)
+options(scipen = 999)
+```
+
+
+
+# Introduksjon
+
+I denne oppgaven skal vi finne ut om høyde bestemmer inntekten til personer. Først skriver vi en liten kort litteraturgjennomgang, samt beskrivende statistikk. Deretter har vi analysert om høyde bestemmer inntekten. Til slutt konkluderer vi om dette stemmer.
+
+# Kort litteraturgjennomgang
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 Artikkelen ser på relasjonen mellom karriere suksess og fysisk høyde. Det baseres på en meta-analyse av litteraturen, hvor resultatene viser mot at høyde er relatert til hvordan andre ser deg, leder muligheter og opptreden. Artikkelen viser også til at høyde har er sterkere relasjon til karriere suksess for menn enn for kvinner, men denne forskjellen sees ikke på som signifikant.Ettersom det ikke finnes forskning på forholde mellom høyde og inntekt, brukes det fire steg som tilsier at høyde er positivt for inntekt etter at det er tatt hensyn til kjønn, alder og vekt. Artikkelen tar for seg en omfattende analyse av relasjonen til høyde og karriere suksess, og resultatene tilsier at høye individer har et fortrinn i viktige aspekter av deres karrierer.
 
 Artikkelen baseres på samfunnets inntrykk av at høye folk er mer suksessfulle. Dette går tilbake til dyreverden hvor høyde er en index for makt og styrke i kritiske siutasjoner. Artikkelen viser til at høyde burde være relevant i arbeidsmiljø hvor overtalelse og og makt er signifikant. Høyde påvirker ikke bare hvordan andre ser deg, men kan også påvirke hvordan du ser deg selv, og personers psykologiske tilpassning og selvtilitt. Et resultat av de to faktorene vil igjen påvirke opptreden som videre påvirker karriere suksess [@judge2004].
@@ -37,11 +52,32 @@ De fire studiene nevnt i artikkelen viser alle til det er en positiv korrelasjon
 
 Denne artikkelen viser tydelig til at fysisk høyde påvirker karrierer og interaksjoner og at en videre forsking burde gjøres på dette. Ettersom det teoretisk er viktig for å skjønne hvorfor og hvordan det har effekt på suksess og inntekt. Og praktisk fordi at ledere lettere kan få en forståelse på om høyde påvirker suksess via hvordan andre ser deg, og ens egen selvtilitt eller om det påvirker suksess helt uavhengig av andre faktorer [@judge2004].
 
+<<<<<<< HEAD
 # Beskrivende statistikk
 
 # Analyse:
 
 For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg.
+=======
+
+# Beskrivende statistikk
+
+Beskrivende statistikk av datasettet "heights" er:
+
+  **heights** = er høyde i tommer
+  **income** = årlig inntekt. Top 2% gjennomsnitt av verdien og gjennomsnittet er brukt til å erstatte alle verdiene                i topp inntekten.
+  **weight** = det er vekten i pounds
+  **age** = alder i år, mellom 47 og 56
+  **martial** = sivilstatus
+  **sex** = kjønn
+  **education** = hvor mange år utdannelse
+  **afgt** = persentilscore på Forsvarets kvalifikasjonsprøve
+
+# Analyse:
+For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg. 
+
+## EDA av datasett
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 
 ```{r hoyde,jobb}
 hoyde <- heights
@@ -49,6 +85,10 @@ hoyde <- heights
 
 Her har man gjort om variablene til metrisk standard. En har også lagt til tre nye variabler.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 hoyde <- hoyde %>% 
   mutate(inntekt = income * 8.42,
@@ -58,6 +98,11 @@ hoyde <- hoyde %>%
 
 ```
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 ggplot(data = hoyde, aes(x = inntekt)) + 
   geom_histogram()
@@ -66,6 +111,10 @@ ggplot(data = hoyde, aes(x = inntekt)) +
 
 I histogrammet ovenfor ser en at utliggerne ligger veldig langt til høyre. Grunnen for dette er at de har funnet gjennomsnittet av topp 2% inntekt.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 hoyde_begr <- hoyde %>% 
   filter(inntekt < 1500000,
@@ -83,8 +132,15 @@ Som man kan se så er personer uten inntekt tatt med i datasettet. Og summen er 
 sum(hoyde$income == 0)
 ```
 
+<<<<<<< HEAD
 ## Regresjonsanalyse
 
+=======
+
+## Regresjonsanalyse
+
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 mod1 <- "inntekt ~ hoyde_cm"
 lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
@@ -94,13 +150,23 @@ lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
 summary(lm1)
 ```
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 -1361001.0 + (10047.9 * 173)
 -1361001.0 + (10047.9 * 161)
 ```
+<<<<<<< HEAD
 
 Man øker inntekten sin med 10047.9 kr per cm en øker i høyde.
 
+=======
+Man øker inntekten sin med 10047.9 kr per cm en øker i høyde.
+
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 mod2 <- "inntekt ~ hoyde_cm + vekt_kg"
 lm2 <- lm(mod2, data = hoyde, subset = complete.cases(hoyde))
@@ -110,6 +176,11 @@ lm2 <- lm(mod2, data = hoyde, subset = complete.cases(hoyde))
 summary(lm2)
 ```
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 -1466873.6 + (11430.3 * 173) + (-1518.4 * 70)
 -1466873.6 + (11430.3 * 161) + (-1518.4 * 65)
@@ -117,6 +188,10 @@ summary(lm2)
 
 Når høyden øker så går inntekten opp, mens når vekten økes går lønnen ned. Men en kombinasjon av disse gir økt inntekt.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 mod3 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
 lm3 <- lm(mod3, data = hoyde, subset = complete.cases(hoyde))
@@ -137,6 +212,10 @@ hoyde <- hoyde %>%
   )
 ```
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
 ```{r}
 huxreg(
    list("mod1" = lm1, "mod2" = lm2, "mod3" = lm3),
@@ -145,6 +224,7 @@ huxreg(
    )
 ```
 
+<<<<<<< HEAD
 ```{r}
 mod4 <- "inntekt ~ sex + hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2)"
 lm4 <- lm(mod4, data = hoyde)
@@ -152,3 +232,50 @@ summary (lm4)
 ```
 
 # Referanser
+=======
+
+
+
+```{r}
+mod4 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2))"
+lm4 <- lm(mod4, data = hoyde)
+summary(lm4)
+```
+
+
+```{r}
+linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0", "sexfemale:vekt_kg = 0", "sexfemale:I(vekt_kg^2) = 0", "sexfemale:BMI = 0", "sexfemale:I(BMI^2) = 0"))
+```
+
+## Interaksjon med variabelen sex
+```{r}
+mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
+lm5 <- lm(mod3, data = hoyde_begr, subset = complete.cases(hoyde))
+summary(lm5)
+```
+
+## Residualer
+
+```{r}
+hoyde_begr <- hoyde %>% 
+  add_residuals(lm5)
+  hoyde_begr %>% 
+    head(n =10)
+```
+
+```{r}
+ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
+  geom_point(
+    data = hoyde_begr, 
+    mapping = aes(x = hoyde_cm, y = resid),
+    colour = "grey40",
+    size = 0.3
+  ) +
+  facet_grid(sex ~ factor(married, labels = c("not married", "married")))
+```
+# Konklusjon
+
+# Referanser
+
+
+>>>>>>> 2b3ae8d86f2de962544449feabc5792886df456e
