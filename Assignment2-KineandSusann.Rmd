@@ -25,6 +25,8 @@ knitr::opts_chunk$set(echo = FALSE)
 options(scipen = 999)
 ```
 
+
+
 \newpage
 
 # Introduksjon
@@ -42,6 +44,7 @@ Artikkelen baseres på samfunnets inntrykk av at høye folk er mer suksessfulle.
 De fire studiene nevnt i artikkelen viser alle til det er en positiv korrelasjon mellom høyde og inntekt. Det konkluderes videre med at effekten til ens høyde ikke svekkes over tid, altså senere i ens karriere, men derimot øker litt. Videre i artikkelen diskuteres det igjen om effekten av høyde varierer basert på ulike typer yrker. Det generelle resultatet av dette var at sosiale yrker, med mye interaksjoner, avhenger mer av på utseende og dermed høyde enn mindre sosiale yrker [@judge2004].
 
 Denne artikkelen viser tydelig til at fysisk høyde påvirker karrierer og interaksjoner og at en videre forsking burde gjøres på dette. Ettersom det teoretisk er viktig for å skjønne hvorfor og hvordan det har effekt på suksess og inntekt. Og praktisk fordi at ledere lettere kan få en forståelse på om høyde påvirker suksess via hvordan andre ser deg, og ens egen selvtilitt eller om det påvirker suksess helt uavhengig av andre faktorer [@judge2004].
+
 
 # Beskrivende statistikk
 
@@ -69,11 +72,13 @@ For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gj
 
 ## EDA av datasett
 
+
 ```{r hoyde,jobb}
 hoyde <- heights
 ```
 
 Her har man gjort om variablene til metrisk standard. En har også lagt til tre nye variabler.
+
 
 ```{r}
 hoyde <- hoyde %>% 
@@ -84,6 +89,7 @@ hoyde <- hoyde %>%
 
 ```
 
+
 ```{r}
 ggplot(data = hoyde, aes(x = inntekt)) + 
   geom_histogram()
@@ -91,6 +97,7 @@ ggplot(data = hoyde, aes(x = inntekt)) +
 ```
 
 I histogrammet ovenfor ser en at utliggerne ligger veldig langt til høyre. Grunnen for dette er at de har funnet gjennomsnittet av topp 2% inntekt.
+
 
 ```{r}
 hoyde_begr <- hoyde %>% 
@@ -109,10 +116,10 @@ Som man kan se så er personer uten inntekt tatt med i dette datasettet.
 sum(hoyde$income == 0)
 ```
 
+
 Summen av personer som er tatt med i datasettet med uten inntekt er på 1740.
 
 ## Regresjonsanalyse
-
 
 
 ```{r}
@@ -123,6 +130,7 @@ lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
 ```{r}
 summary(lm1)
 ```
+
 
 ```{r}
 -1361001.0 + (10047.9 * 173)
@@ -140,12 +148,14 @@ lm2 <- lm(mod2, data = hoyde, subset = complete.cases(hoyde))
 summary(lm2)
 ```
 
+
 ```{r}
 -1466873.6 + (11430.3 * 173) + (-1518.4 * 70)
 -1466873.6 + (11430.3 * 161) + (-1518.4 * 65)
 ```
 
 Når høyden øker så går inntekten opp, mens når vekten økes går lønnen ned. Men en kombinasjon av disse gir økt inntekt.
+
 
 ```{r}
 mod3 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
@@ -168,6 +178,7 @@ hoyde <- hoyde %>%
   )
 ```
 
+
 ```{r}
 huxreg(
    list("mod1" = lm1, "mod2" = lm2, "mod3" = lm3),
@@ -175,6 +186,8 @@ huxreg(
    note = "Regresjonstabell 3: {stars}. T statistics in brackets."
    )
 ```
+
+
 
 ```{r}
 mod4 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2))"
@@ -218,4 +231,6 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
 
 \newpage
 
+
 # Referanser
+
