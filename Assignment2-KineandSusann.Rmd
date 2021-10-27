@@ -190,6 +190,7 @@ mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
 lm5 <- lm(mod3, data = hoyde_begr, subset = complete.cases(hoyde))
 summary(lm5)
 ```
+
 ## Residualer
 
 ```{r}
@@ -214,14 +215,3 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
 # Referanser
 
 
-
-
-=======
-```{r}
-mod4 <- "inntekt ~ sex + hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2)"
-lm4 <- lm(mod4, data = hoyde)
-summary (lm4)
-```
-
-# Referanser
->>>>>>> litteraturgjennomgang
