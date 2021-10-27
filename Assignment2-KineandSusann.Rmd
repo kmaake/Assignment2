@@ -2,10 +2,10 @@
 title: "Er det høyde som bestemmer inntekt?"
 authors: Kine Maakestad & Susann Sivertsen
 output:
+  pdf_document: default
+  html_notebook: default
   html_document:
     df_print: paged
-  html_notebook: default
-  pdf_document: default
   word_document: default
 lang: no-NB
 bibliography: references.bib
@@ -27,28 +27,22 @@ I denne oppgaven skal vi finne ut om høyde bestemmer inntekten våres.
 
 # Kort litteraturgjennomgang
 
-Artikkelen ser på relasjonen mellom karriere suksess og fysisk høyde. Det baseres på en meta-analyse av litteraturen, hvor resultatene viser mot at høyde er relatert til sosiale forhold, leder muligheter (emerge) og opptreden. Artikkelen viser også til at høyde har er sterkere relasjon til karriere suksess for menn enn for kvinner, men denne forskjellen sees ikke på som signifikant. Ettersom det ikke finnes forskning på forholde mellom høyde og inntekt, brukes det fire steg som tilsier at høyde er positivt for inntekt etter at det er tatt hensyn til kjønn, alder og vekt. Artikkelen tar for seg en omfattende analyse av relasjonen til høyde og karriere suksess, og resultatene tilsier at høye individer har et fortrinn i viktige aspekter av deres karrierer. 
+Artikkelen ser på relasjonen mellom karriere suksess og fysisk høyde. Det baseres på en meta-analyse av litteraturen, hvor resultatene viser mot at høyde er relatert til sosiale forhold, leder muligheter (emerge) og opptreden. Artikkelen viser også til at høyde har er sterkere relasjon til karriere suksess for menn enn for kvinner, men denne forskjellen sees ikke på som signifikant. Ettersom det ikke finnes forskning på forholde mellom høyde og inntekt, brukes det fire steg som tilsier at høyde er positivt for inntekt etter at det er tatt hensyn til kjønn, alder og vekt. Artikkelen tar for seg en omfattende analyse av relasjonen til høyde og karriere suksess, og resultatene tilsier at høye individer har et fortrinn i viktige aspekter av deres karrierer.
 
-
-Artikkelen baseres på samfunnets inntrykk av at høye folk er mer suksessfulle. 
-
-
-
-
-
-
-
+Artikkelen baseres på samfunnets inntrykk av at høye folk er mer suksessfulle. Dette går tilbake til dyreverden hvor høyde er en index for makt og styrke i kritiske siutasjoner (KILDE)
 
 # Beskrivende statistikk
 
 # Analyse:
-For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg. 
+
+For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg.
 
 ```{r hoyde,jobb}
 hoyde <- heights
 ```
 
-Her har man gjort om variablene til metrisk standard. En har også lagt til tre nye variabler. 
+Her har man gjort om variablene til metrisk standard. En har også lagt til tre nye variabler.
+
 ```{r}
 hoyde <- hoyde %>% 
   mutate(inntekt = income * 8.42,
@@ -58,14 +52,13 @@ hoyde <- hoyde %>%
 
 ```
 
-
 ```{r}
 ggplot(data = hoyde, aes(x = inntekt)) + 
   geom_histogram()
   geom_histogram(bins = 30)
 ```
-I histogrammet ovenfor ser en at utliggerne ligger veldig langt til høyre. Grunnen for dette er at de har funnet gjennomsnittet av topp 2% inntekt.  
 
+I histogrammet ovenfor ser en at utliggerne ligger veldig langt til høyre. Grunnen for dette er at de har funnet gjennomsnittet av topp 2% inntekt.
 
 ```{r}
 hoyde_begr <- hoyde %>% 
@@ -78,16 +71,13 @@ ggplot(data = hoyde_begr, aes(x = inntekt)) +
   geom_histogram()
 ```
 
-Som man kan se så er personer uten inntekt tatt med i datasettet. Og summen er 1740 personer uten inntekt. 
+Som man kan se så er personer uten inntekt tatt med i datasettet. Og summen er 1740 personer uten inntekt.
 
 ```{r}
 sum(hoyde$income == 0)
 ```
 
-
 ## Regresjonsanalyse
-
-
 
 ```{r}
 mod1 <- "inntekt ~ hoyde_cm"
@@ -98,12 +88,12 @@ lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
 summary(lm1)
 ```
 
-
 ```{r}
 -1361001.0 + (10047.9 * 173)
 -1361001.0 + (10047.9 * 161)
 ```
-Man øker inntekten sin med 10047.9 kr per cm en øker i høyde. 
+
+Man øker inntekten sin med 10047.9 kr per cm en øker i høyde.
 
 ```{r}
 mod2 <- "inntekt ~ hoyde_cm + vekt_kg"
@@ -114,14 +104,12 @@ lm2 <- lm(mod2, data = hoyde, subset = complete.cases(hoyde))
 summary(lm2)
 ```
 
-
-
 ```{r}
 -1466873.6 + (11430.3 * 173) + (-1518.4 * 70)
 -1466873.6 + (11430.3 * 161) + (-1518.4 * 65)
 ```
 
-Når høyden øker så går inntekten opp, mens når vekten økes går lønnen ned. Men en kombinasjon av disse gir økt inntekt. 
+Når høyden øker så går inntekten opp, mens når vekten økes går lønnen ned. Men en kombinasjon av disse gir økt inntekt.
 
 ```{r}
 mod3 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
@@ -131,7 +119,6 @@ lm3 <- lm(mod3, data = hoyde, subset = complete.cases(hoyde))
 ```{r}
 summary(lm3)
 ```
-
 
 ```{r}
 hoyde <- hoyde %>% 
@@ -143,8 +130,6 @@ hoyde <- hoyde %>%
     )
   )
 ```
-
-
 
 ```{r}
 huxreg(
@@ -160,10 +145,4 @@ lm4 <- lm(mod4, data = hoyde)
 summary (lm4)
 ```
 
-
-
 # Referanser
-
-
-
-
