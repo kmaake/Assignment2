@@ -187,7 +187,7 @@ huxreg(
    )
 ```
 
-
+## Interaksjon med variabelen sex
 
 ```{r}
 mod4 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2))"
@@ -199,8 +199,8 @@ summary(lm4)
 linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0", "sexfemale:vekt_kg = 0", "sexfemale:I(vekt_kg^2) = 0", "sexfemale:BMI = 0", "sexfemale:I(BMI^2) = 0"))
 ```
 
-## Interaksjon med variabelen sex
 
+Her har vi laget den endelig modellen uten 2% topp inntekt og 0 inntekt. 
 ```{r}
 mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
 lm5 <- lm(mod3, data = hoyde_begr, subset = complete.cases(hoyde))
@@ -228,6 +228,7 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
 ```
 
 # Konklusjon
+Fra modellene kan vi konkludere med at høyde ikke har noe påvirkning på inntekt. 
 
 \newpage
 
