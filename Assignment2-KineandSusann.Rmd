@@ -3,10 +3,8 @@ title: "Er det høyde som bestemmer inntekt?"
 authors: Kine Maakestad & Susann Sivertsen
 output:
   pdf_document: default
-  html_notebook: default
-  html_document:
-    df_print: paged
   word_document: default
+  html_document: default
 lang: no-NB
 bibliography: references.bib
 ---
@@ -21,6 +19,8 @@ library(huxtable)
 library(car)
 options(scipen = 999)
 ```
+
+
 
 # Introduksjon
 
@@ -57,7 +57,6 @@ hoyde <- hoyde %>%
          hoyde_cm = height * 2.54,
          vekt_kg = weight * 0.454,
          BMI = vekt_kg/(hoyde_cm/100)^2)
-
 ```
 
 
@@ -179,7 +178,8 @@ summary(lm5)
 ```{r}
 hoyde_begr <- hoyde %>% 
   add_residuals(lm5)
-  hoyde_begr
+  hoyde_begr %>% 
+    head(n =10)
 ```
 
 ```{r}
