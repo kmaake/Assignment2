@@ -30,8 +30,21 @@ I denne oppgaven skal vi finne ut om høyde bestemmer inntekten våres.
 
 # Beskrivende statistikk
 
+Beskrivende statistikk av datasettet "heights" er:
+
+  **heights** = er høyde i tommer
+  **income** = årlig inntekt. Top 2% gjennomsnitt av verdien og gjennomsnittet er brukt til å erstatte alle verdiene                i topp inntekten.
+  **weight** = det er vekten i pounds
+  **age** = alder i år, mellom 47 og 56
+  **martial** = sivilstatus
+  **sex** = kjønn
+  **education** = hvor mange år utdannelse
+  **afgt** = persentilscore på Forsvarets kvalifikasjonsprøve
+
 # Analyse:
 For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg. 
+
+## EDA av datasett
 
 ```{r hoyde,jobb}
 hoyde <- heights
@@ -75,7 +88,6 @@ sum(hoyde$income == 0)
 
 
 ## Regresjonsanalyse
-
 
 
 ```{r}
@@ -146,20 +158,41 @@ huxreg(
 
 
 ```{r}
-mod4 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2)) + BMI + I(BMI^2)"
+mod4 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2))"
 lm4 <- lm(mod4, data = hoyde)
 summary(lm4)
 ```
 
 
 ```{r}
-linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0"))
+linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0", "sexfemale:vekt_kg = 0", "sexfemale:I(vekt_kg^2) = 0", "sexfemale:BMI = 0", "sexfemale:I(BMI^2) = 0"))
+```
+
+## Interaksjon med variabelen sex
+```{r}
+mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
+lm5 <- lm(mod3, data = hoyde_begr, subset = complete.cases(hoyde))
+summary(lm5)
+```
+## Residualer
+
+```{r}
+hoyde_begr <- hoyde %>% 
+  add_residuals(lm5)
+  hoyde_begr
 ```
 
 ```{r}
-
+ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
+  geom_point(
+    data = hoyde_begr, 
+    mapping = aes(x = hoyde_cm, y = resid),
+    colour = "grey40",
+    size = 0.3
+  ) +
+  facet_grid(sex ~ factor(married, labels = c("not married", "married")))
 ```
-
+# Konklusjon
 
 # Referanser
 
