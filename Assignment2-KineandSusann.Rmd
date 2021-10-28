@@ -227,7 +227,7 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
 ```
 
 # Konklusjon
-Fra modellene kan vi konkludere med at høyde ikke har noe påvirkning på inntekt. 
+Vi kan konkludere med at høyde ikke har en påvirkning på inntekt. 
 
 \newpage
 
