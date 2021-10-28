@@ -67,7 +67,7 @@ Beskrivende statistikk av datasettet "heights" er:
 
 # Analyse:
 
-For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg.
+For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg. Videre lager vi ulike modeller for å teste påstanden om at høyde har en påvirkning.  
 
 ## EDA av datasett
 
@@ -109,7 +109,7 @@ ggplot(data = hoyde_begr, aes(x = inntekt)) +
   geom_histogram()
 ```
 
-Som man kan se så er personer uten inntekt tatt med i dette datasettet. 
+I dette histogrammet utlukker man topp 2%, samtidig som personer uten inntekt fortsatt er tatt med i datasettet. 
 
 ```{r}
 sum(hoyde$income == 0)
@@ -136,7 +136,7 @@ summary(lm1)
 -1361001.0 + (10047.9 * 161)
 ```
 
-Man øker inntekten sin med 10047.9 kr per cm en øker i høyde.
+Utfra denne modellen ser man at inntekten øker med 10047.9 kr per cm man øker i høyde. Med utgangspunkt i modellen er det her et eksempel tatt med på at dersom en person er 173 cm høy vil inntekten være på 377.285,7 kr, i mens dersom personen er 161 cm vil inntekten være på 256.710,9 kr. 
 
 ```{r}
 mod2 <- "inntekt ~ hoyde_cm + vekt_kg"
@@ -153,7 +153,7 @@ summary(lm2)
 -1466873.6 + (11430.3 * 161) + (-1518.4 * 65)
 ```
 
-Når høyden øker så går inntekten opp, mens når vekten økes går lønnen ned. Men en kombinasjon av disse gir økt inntekt.
+Videre når man tar inn variablen vekt, øker inntekten fortsatt etter høyde, mens når vekten øker går lønnen ned. Og en kombinasjon av disse gir økt inntekt. Her har man igjen et eksempel med utgangspunkt i modellen som viser at dersom personen på 173 cm veier 70 kg vil den tjene 404.280,3 kr, og personen på 161 cm som veier 65 kg vil tjene 274.708,7 kr. 
 
 
 ```{r}
@@ -164,6 +164,8 @@ lm3 <- lm(mod3, data = hoyde, subset = complete.cases(hoyde))
 ```{r}
 summary(lm3)
 ```
+
+Videre i modellen over vises det at variabelen BMI er med på å øke inntekt. 
 
 
 ```{r}
@@ -177,6 +179,7 @@ hoyde <- hoyde %>%
   )
 ```
 
+Videre er de 3 modellene samlet i en huxreg modell:
 
 ```{r}
 huxreg(
@@ -188,18 +191,21 @@ huxreg(
 
 ## Interaksjon med variabelen sex
 
+Her lages variabelen sex til i en interaksjon. 
+
 ```{r}
 mod4 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2))"
 lm4 <- lm(mod4, data = hoyde)
 summary(lm4)
 ```
 
+
 ```{r}
 linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0", "sexfemale:vekt_kg = 0", "sexfemale:I(vekt_kg^2) = 0", "sexfemale:BMI = 0", "sexfemale:I(BMI^2) = 0"))
 ```
 
 
-Her har vi laget den endelig modellen uten 2% topp inntekt og 0 inntekt. 
+Her har vi laget den endelig modellen uten 2% topp inntekt og 0 i inntekt. 
 ```{r}
 mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
 lm5 <- lm(mod3, data = hoyde_begr, subset = complete.cases(hoyde))
@@ -215,6 +221,7 @@ hoyde_begr <- hoyde %>%
     head(n =10)
 ```
 
+
 ```{r}
 ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
   geom_point(
@@ -226,8 +233,11 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
   facet_grid(sex ~ factor(married, labels = c("not married", "married")))
 ```
 
+Totalen av residualene går i mot den tidligere modellen og viser ved flere eksempler at høyde ikke har sammenheng med inntekt. En av eksempelene vises det at en på 177 tjener 294.700 kr, i mens en på 165 tjener 884.100 kr. 
+
+
 # Konklusjon
-Vi kan konkludere med at høyde ikke har en påvirkning på inntekt. 
+Med utgangspunkt i totalen av alle modellene kan vi konkludere med at høyde ikke har en reell påvirkning på inntekt. 
 
 \newpage
 
