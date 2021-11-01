@@ -205,7 +205,7 @@ linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0", "sexfemale:ve
 ```
 
 
-Her har vi laget den endelig modellen uten 2% topp inntekt og 0 i inntekt. 
+Her har vi laget den endelig modellen uten 2% topp inntekt og 0 i inntekt. I denne modellen tar vi også med kjønn, utdanning og alder, dette for å se om disse faktorene har en påvirkning på inntekten. 
 ```{r}
 mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI + sex + education + age"
 lm5 <- lm(mod5, data = hoyde_begr, subset = complete.cases(hoyde))
@@ -237,7 +237,7 @@ Totalen av residualene går i mot den tidligere modellen og viser ved flere ekse
 
 
 # Konklusjon
-Med utgangspunkt i totalen av alle modellene kan vi konkludere med at høyde ikke har en reell påvirkning på inntekt. 
+Med utgangspunkt i totalen av alle modellene kan vi konkludere med at høyde ikke har en reell påvirkning på inntekt. Uansett om høyde ikke har en påvirkning, så har man andre faktorer som spiller inn. 
 
 \newpage
 
