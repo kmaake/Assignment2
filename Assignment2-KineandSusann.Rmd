@@ -36,7 +36,7 @@ I denne oppgaven skal vi finne ut om høyde bestemmer inntekten til personer. F�
 
 **The Effect of Physical Height on Workplace Success and Income: Preliminary Test of a Theoretical Model, av @judge2004.**
 
-Artikkelen ser på relasjonen mellom karriere suksess og fysisk høyde. Det baseres på en meta-analyse av litteraturen, hvor resultatene viser mot at høyde er relatert til hvordan andre ser deg, leder muligheter og opptreden. Artikkelen viser også til at høyde har er sterkere relasjon til karriere suksess for menn enn for kvinner, men denne forskjellen sees ikke på som signifikant.Ettersom det ikke finnes forskning på forholde mellom høyde og inntekt, brukes det fire steg som tilsier at høyde er positivt for inntekt etter at det er tatt hensyn til kjønn, alder og vekt. Artikkelen tar for seg en omfattende analyse av relasjonen til høyde og karriere suksess, og resultatene tilsier at høye individer har et fortrinn i viktige aspekter av deres karrierer.
+Artikkelen ser på relasjonen mellom karriere suksess og fysisk høyde. Det baseres på en meta-analyse av litteraturen, hvor resultatene viser mot at høyde er relatert til hvordan andre ser deg, leder muligheter og opptreden. Artikkelen viser også til at høyde har er sterkere relasjon til karriere suksess for menn enn for kvinner, men denne forskjellen sees ikke på som signifikant. Ettersom det ikke finnes forskning på forholde mellom høyde og inntekt, brukes det fire steg som tilsier at høyde er positivt for inntekt etter at det er tatt hensyn til kjønn, alder og vekt. Artikkelen tar for seg en omfattende analyse av relasjonen til høyde og karriere suksess, og resultatene tilsier at høye individer har et fortrinn i viktige aspekter av deres karrierer.
 
 Artikkelen baseres på samfunnets inntrykk av at høye folk er mer suksessfulle. Dette går tilbake til dyreverden hvor høyde er en index for makt og styrke i kritiske siutasjoner. Artikkelen viser til at høyde burde være relevant i arbeidsmiljø hvor overtalelse og og makt er signifikant. Høyde påvirker ikke bare hvordan andre ser deg, men kan også påvirke hvordan du ser deg selv, og personers psykologiske tilpassning og selvtilitt. Et resultat av de to faktorene vil igjen påvirke opptreden som videre påvirker karriere suksess [@judge2004].
 
@@ -67,7 +67,7 @@ Beskrivende statistikk av datasettet "heights" er:
 
 # Analyse:
 
-For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg. Videre lager vi ulike modeller for å teste påstanden om at høyde har en påvirkning.  
+For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gjort om inntekt, høyde og vekt til metrisk standard. Som vil si at inntekten blir gjort om til norske kroner, høyde i cm og vekten i kg. Videre lager vi ulike modeller for å teste påstanden om høyde har en påvirkning på inntekt.   
 
 ## EDA av datasett
 
@@ -76,7 +76,7 @@ For analyse delen lager vi først et histogram med variabelen inntekt. Vi har gj
 hoyde <- heights
 ```
 
-Her har man gjort om variablene til metrisk standard. En har også lagt til tre nye variabler.
+Her er variablene gjort om til metrisk standard. Det er også lagt til tre nye variabler.
 
 
 ```{r}
@@ -95,7 +95,7 @@ ggplot(data = hoyde, aes(x = inntekt)) +
   geom_histogram(bins = 30)
 ```
 
-I histogrammet ovenfor ser en at utliggerne ligger veldig langt til høyre. Grunnen for dette er at de har funnet gjennomsnittet av topp 2% inntekt.
+I histogrammet ovenfor ser man  at utliggerne ligger veldig langt til høyre. Grunnen til dette er fordi det er funnet gjennomsnittet inkludert topp 2% inntekt.
 
 
 ```{r}
@@ -116,7 +116,7 @@ sum(hoyde$income == 0)
 ```
 
 
-Summen av personer som er tatt med i datasettet med uten inntekt er på 1740.
+Summen av personer som er tatt med i datasettet uten inntekt er på 1740 stykk.
 
 ## Regresjonsanalyse
 
@@ -233,11 +233,11 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
   facet_grid(sex ~ factor(married, labels = c("not married", "married")))
 ```
 
-Totalen av residualene går i mot den tidligere modellen og viser ved flere eksempler at høyde ikke har sammenheng med inntekt. En av eksempelene vises det at en på 177 tjener 294.700 kr, i mens en på 165 tjener 884.100 kr. 
+Totalen av residualene går i mot den tidligere modellen og viser ved flere eksempler at høyde ikke har sammenheng med inntekt. En av eksempelene vises det at en på 177 cm tjener 294.700 kr, i mens en på 165 cm tjener 884.100 kr. 
 
 
 # Konklusjon
-Med utgangspunkt i totalen av alle modellene kan vi konkludere med at høyde ikke har en reell påvirkning på inntekt. Uansett om høyde ikke har en påvirkning, så har man andre faktorer som spiller inn. 
+Med utgangspunkt i totalen av alle modellene kan vi konkludere med at høyde ikke har en reell påvirkning på inntekt. Inntekt vil være sammensatt av flere faktorer som spiller en større rolle enn fysisk høyde. 
 
 \newpage
 
