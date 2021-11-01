@@ -201,8 +201,8 @@ linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0", "sexfemale:ve
 
 Her har vi laget den endelig modellen uten 2% topp inntekt og 0 inntekt. 
 ```{r}
-mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
-lm5 <- lm(mod3, data = hoyde_begr, subset = complete.cases(hoyde))
+mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI + sex + education + age"
+lm5 <- lm(mod5, data = hoyde_begr, subset = complete.cases(hoyde))
 summary(lm5)
 ```
 
