@@ -1,0 +1,6 @@
+---
+title: "AG comments"
+output: html_notebook
+---
+
+-   reproduserbart som html og pdf direkte. Flott!
