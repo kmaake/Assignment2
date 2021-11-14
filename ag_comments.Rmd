@@ -1,0 +1,12 @@
+---
+title: "AG comments"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+-   reproduserbart som html og pdf direkte. Flott!
+-   Et fint lite paper
+-   Kunne enkelt vært utvidet med litt mer inngående EDA
+-   Lager man en modell sex\*(education + afqt  + married) vil en se at uforklart variasjon i inntekt (residualene) ikke synes å ha noen sammenheng med høyde (eller vekt eller bmi)
